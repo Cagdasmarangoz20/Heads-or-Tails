@@ -77,7 +77,10 @@ class DiceState extends State<HeadsOrTailsPage> with SingleTickerProviderStateMi
       body: GestureDetector(
         onTap: _startAnimation,
         child: Container(
-          color: Colors.white,
+          decoration: const BoxDecoration(image: DecorationImage(
+            image: AssetImage("assets/images/desk.jpg"),
+            fit: BoxFit.cover,
+          )),
           child: Center(
             child: _isAnimating
                 ? _buildCoin()
@@ -90,12 +93,12 @@ class DiceState extends State<HeadsOrTailsPage> with SingleTickerProviderStateMi
                       height: 150,
                     ),
                     Text(
-              _isHeads ? 'Tura' : 'Yazı',
-              style: const TextStyle(
-                    fontSize: 50,
-                    fontWeight: FontWeight.bold,
-              ),
-            ),
+                      _isHeads ? 'Tura' : 'Yazı',
+                      style: const TextStyle(
+                        fontSize: 50,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
 
                   ],
                 ),
