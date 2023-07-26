@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 class HeadsOrTailsPage extends StatefulWidget {
@@ -9,11 +10,13 @@ class HeadsOrTailsPage extends StatefulWidget {
   DiceState createState() => DiceState();
 }
 
-class DiceState extends State<HeadsOrTailsPage> with SingleTickerProviderStateMixin{
+class DiceState extends State<HeadsOrTailsPage>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
   bool _isHeads = true;
   bool _isAnimating = false;
+
 
   @override
   void initState() {
@@ -49,8 +52,8 @@ class DiceState extends State<HeadsOrTailsPage> with SingleTickerProviderStateMi
     if (!_isAnimating) {
       setState(() {
         _isAnimating = true;
-
       });
+
       _animationController.forward();
     }
   }
@@ -71,13 +74,18 @@ class DiceState extends State<HeadsOrTailsPage> with SingleTickerProviderStateMi
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Heads or Tails'),
+        title: const Text('Yazı Tura'),
         backgroundColor: Colors.orange,
       ),
       body: GestureDetector(
-        onTap: _startAnimation,
+        onTap: (){
+          final player=AudioCache();
+          _startAnimation();
+          player.play("coinsound.mp3");
+        },
         child: Container(
-          decoration: const BoxDecoration(image: DecorationImage(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
             image: AssetImage("assets/images/desk.jpg"),
             fit: BoxFit.cover,
           )),
@@ -85,27 +93,27 @@ class DiceState extends State<HeadsOrTailsPage> with SingleTickerProviderStateMi
             child: _isAnimating
                 ? _buildCoin()
                 : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      _isHeads ? 'assets/images/money1.png' : 'assets/images/money2.png',
-                      width: 150,
-                      height: 150,
-                    ),
-                    Text(
-                      _isHeads ? 'Tura' : 'Yazı',
-                      style: const TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.bold,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        _isHeads
+                            ? 'assets/images/money1.png'
+                            : 'assets/images/money2.png',
+                        width: 150,
+                        height: 150,
                       ),
-                    ),
-
-                  ],
-                ),
+                      Text(
+                        _isHeads ? 'Tura' : 'Yazı',
+                        style: const TextStyle(
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
           ),
         ),
       ),
     );
   }
 }
-

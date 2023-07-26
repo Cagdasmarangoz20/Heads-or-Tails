@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.head">
+    package="com.cagdasmarangoz.heads_or_tails">
    <application
         android:label="head"
         android:name="${applicationName}"
